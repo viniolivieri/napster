@@ -9,4 +9,4 @@ COPY src/ ./src/
 
 RUN mvn package
 
-CMD ["java", "-jar", "target/your-application.jar"]
+CMD ["java", "-jar", "target/napster.jar"]
