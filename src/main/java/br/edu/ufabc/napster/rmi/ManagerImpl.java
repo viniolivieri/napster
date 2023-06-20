@@ -1,10 +1,15 @@
 package br.edu.ufabc.napster.rmi;
 
-import br.edu.ufabc.napster.rmi.models.Peer;
+import br.edu.ufabc.napster.peer.Peer;
+import br.edu.ufabc.napster.rmi.serializables.ArrayListSerializable;
+import br.edu.ufabc.napster.rmi.serializables.Response;
 import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ManagerImpl extends UnicastRemoteObject implements Manager {
 
@@ -22,36 +27,40 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
     }
 
     // Adding new peer to the list of connected peers.
-    public Response join(int peerId, String[] peerFiles) throws RemoteException, Exception {
-        Peer newPeer = new Peer(peerId, peerFiles);
-        if (!this.idExists(peerId)) {
+    public Response join(Peer newPeer) throws Exception {
+        String peerAddress = newPeer.address;
+        if (!this.addressExists(peerAddress)) {
             this.peersList.add(newPeer);
-            return new Response("JOIN_OK", "SERVER", Integer.toString(peerId));
+            //System.out.printf("Sou peer %s com arquivos %s.", newPeer.address, Arrays.toString(newPeer.getSharedFiles()));
+            return new Response("JOIN_OK", "SERVER",newPeer.address);
         }
         else {
-            throw new Exception("peerId already exists, please choose another one.");
+            throw new Exception("peer with this address already exists, please choose another one.");
         }
     }
 
     // Return list of peers that has the searched file.
-    public Peer[] search(String file) throws RemoteException{
-
-        return null;
+    public ArrayListSerializable search(String file) throws RemoteException{
+        ArrayList<Peer> peersWithThisFile = new ArrayList<Peer>();
+        for (Peer peer : this.peersList) {
+            List peerFiles = Arrays.asList(peer.getSharedFiles());
+            if(peerFiles.contains(file)) {
+                peersWithThisFile.add(peer);
+            }
+        }
+        System.out.println(peersWithThisFile.toString());
+        return (ArrayListSerializable) peersWithThisFile;
     }
 
-
-    public ArrayQueue search() throws RemoteException {
-        return null;
-    }
 
     public Response update() throws RemoteException {
 
         return null;
     }
 
-    private boolean idExists(int id) {
+    private boolean addressExists(String address) {
         for (Peer peer : this.peersList) {
-            if(peer.id == id) {
+            if(peer.address.equals(address)) {
                 return true;
             }
         }

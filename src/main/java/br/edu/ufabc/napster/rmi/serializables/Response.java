@@ -1,4 +1,4 @@
-package br.edu.ufabc.napster.rmi;
+package br.edu.ufabc.napster.rmi.serializables;
 
 import java.io.Serializable;
 
@@ -8,8 +8,6 @@ public class Response implements Serializable {
     public String message;
     public String from;
     public String to;
-    public String metadata;
-
 
     public Response(String message, String from, String to) {
         this.message = message;

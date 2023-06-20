@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Coded join function.">
+    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Added peer to test join function.">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/serializables/ArrayListSerializable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_files/peer1/test1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/serializables/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/models/Peer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -54,6 +59,54 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vmoli\projeto1\napster\test_files" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.Dockerfile">
+    <configuration name="Peer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.ufabc.napster.peer.Peer" />
+      <module name="napster" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.ufabc.napster.peer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.ufabc.napster.server.Server" />
+      <module name="napster" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.ufabc.napster.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Application.Peer" />
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,12 +123,35 @@
       <option name="project" value="LOCAL" />
       <updated>1687274771288</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added peer to test join function.">
+      <created>1687280580898</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1687280580898</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Coded join function." />
-    <option name="LAST_COMMIT_MESSAGE" value="Coded join function." />
+    <MESSAGE value="Added peer to test join function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added peer to test join function." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

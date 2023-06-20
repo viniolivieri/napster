@@ -24,9 +24,11 @@ public class Server {
     public static Server getStartingInformation() throws UnknownHostException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter server IP: ");
-        InetAddress ip = InetAddress.getByName(scanner.nextLine());
+        //InetAddress ip = InetAddress.getByName(scanner.nextLine());
+        InetAddress ip = InetAddress.getByName("127.0.0.1");
         System.out.println("Enter server port: ");
-        int port =  Integer.parseInt(scanner.nextLine());
+        //int port =  Integer.parseInt(scanner.nextLine());
+        int port =  1099;
 
         Server server = new Server(ip, port);
         return server;
