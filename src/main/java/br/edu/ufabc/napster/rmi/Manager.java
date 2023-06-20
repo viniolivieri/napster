@@ -6,7 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface Manager extends Remote {
-    public String join() throws RemoteException;
+    public Response join() throws RemoteException;
     public ArrayQueue search() throws RemoteException;
-    public String update() throws RemoteException;
+    public Response update() throws RemoteException;
 }
