@@ -1,8 +1,10 @@
 package br.edu.ufabc.napster.server;
 
+import br.edu.ufabc.napster.rmi.ManagerImpl;
+import br.edu.ufabc.napster.rmi.Manager;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.util.Scanner;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,7 +28,7 @@ public class Server {
         System.out.println("Enter server port: ");
         int port =  Integer.parseInt(scanner.nextLine());
 
-        Server server = new Server(ip,port);
+        Server server = new Server(ip, port);
         return server;
     }
     public static void main(String[] args) throws Exception{
@@ -34,9 +36,11 @@ public class Server {
         // Captures starting information from keyboard
         Server server = getStartingInformation();
         LocateRegistry.createRegistry(server.getPort());
+        Manager manager = new ManagerImpl();
 
         Registry reg = LocateRegistry.getRegistry();
-        //reg.bind("rmi://127.0.0.1/join", null); //change to JOIN
+        reg.bind("rmi://127.0.0.1/manager", manager);
+        System.out.println("Server no ar.");
     }
 
 }

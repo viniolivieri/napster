@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/models/Peer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Coded join function.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,9 +63,19 @@
       <option name="presentableId" value="Default" />
       <updated>1687271864267</updated>
     </task>
+    <task id="LOCAL-00001" summary="Coded join function.">
+      <created>1687274771288</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687274771288</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Coded join function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Coded join function." />
   </component>
 </project>

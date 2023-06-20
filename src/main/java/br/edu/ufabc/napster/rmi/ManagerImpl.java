@@ -9,11 +9,19 @@ import java.rmi.server.UnicastRemoteObject;
 public class ManagerImpl extends UnicastRemoteObject implements Manager {
 
     private ArrayQueue<Peer> peersList;
+
+    // Default capacity of 1000 peers
     public ManagerImpl() throws RemoteException {
         super();
-        this.peersList = new ArrayQueue();
+        this.peersList = new ArrayQueue(1000);
     }
 
+    public ManagerImpl(int capacity) throws RemoteException {
+        super();
+        this.peersList = new ArrayQueue(capacity);
+    }
+
+    // Adding new peer to the list of connected peers.
     public Response join(int peerId, String[] peerFiles) throws RemoteException, Exception {
         Peer newPeer = new Peer(peerId, peerFiles);
         if (!this.idExists(peerId)) {
@@ -24,10 +32,18 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
             throw new Exception("peerId already exists, please choose another one.");
         }
     }
-    public ArrayQueue search(String file) throws RemoteException{
+
+    // Return list of peers that has the searched file.
+    public Peer[] search(String file) throws RemoteException{
 
         return null;
     }
+
+
+    public ArrayQueue search() throws RemoteException {
+        return null;
+    }
+
     public Response update() throws RemoteException {
 
         return null;
