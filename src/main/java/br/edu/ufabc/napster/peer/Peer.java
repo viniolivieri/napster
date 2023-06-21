@@ -62,6 +62,15 @@ public class Peer implements Serializable {
         Peer peer = new Peer(ip, port, folder);
         return peer;
     }
+
+    public String toString() {
+        return "IP: " + this.getIp() + "\n"+
+                "Port: " + this.getPort() + "\n"+
+                "Address: "+ this.address + "\n"+
+                "Shared Folder: " + this.getSharedFolder() + "\n"+
+                "Files: " + this.files.toString() + "\n"+
+                "Get Files: " + this.getSharedFiles().toString() + "\n";
+    }
     public static void main(String[] args) throws Exception{
 
         // Captures starting information from keyboard
@@ -69,16 +78,14 @@ public class Peer implements Serializable {
 
         Registry reg = LocateRegistry.getRegistry();
         Manager manager = (Manager) reg.lookup("rmi://127.0.0.1/manager");
-        Response response = manager.join(peer);
-        //Response response = manager.update(peer, "test1.txt");
-        System.out.println(response);
+
+        //System.out.println(manager.join(peer));
+        System.out.println(manager.update(peer, "test1.txt"));
 
         ArrayList<Peer> peers = manager.search("test1.txt");
-        for (Peer p : peers) {
-            System.out.println(p.address);
-            System.out.println(p.getSharedFolder());
+        for(Peer p: peers) {
+            System.out.println(p.toString());
         }
-
 
     }
 

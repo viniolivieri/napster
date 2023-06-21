@@ -2,28 +2,25 @@ package br.edu.ufabc.napster.rmi;
 
 import br.edu.ufabc.napster.peer.Peer;
 import br.edu.ufabc.napster.rmi.serializables.Response;
-import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class ManagerImpl extends UnicastRemoteObject implements Manager {
 
-    private ArrayQueue peersList;
+    private ArrayBlockingQueue<Peer> peersList;
 
     // Default capacity of 1000 peers
     public ManagerImpl() throws RemoteException {
         super();
-        this.peersList = new ArrayQueue(1000);
+        this.peersList = new ArrayBlockingQueue(1000);
     }
 
     public ManagerImpl(int capacity) throws RemoteException {
         super();
-        this.peersList = new ArrayQueue(capacity);
+        this.peersList = new ArrayBlockingQueue(capacity);
     }
 
     // Adding new peer to the list of connected peers.
@@ -45,11 +42,8 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
         Iterator<Peer> peerListIterator = this.peersList.iterator();
 
         while (peerListIterator.hasNext()) {
-            System.out.println(peerListIterator.hasNext());
-            System.out.println(peerListIterator.next().address);
-            System.out.println(peerListIterator.next().getSharedFiles());
             Peer peer = peerListIterator.next();
-            List peerFiles = Arrays.asList(peer.getSharedFiles());
+            List peerFiles = peer.files;
             if(peerFiles.contains(file)) {
                 peersWithThisFile.add(peer);
             }
@@ -59,8 +53,16 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
 
 
     public Response update(Peer peer, String file) throws RemoteException {
-
         peer.files.add(file);
+        Iterator<Peer> iteratorPeersList = this.peersList.iterator();
+        while (iteratorPeersList.hasNext()){
+            Peer oldPeer = iteratorPeersList.next();
+            if (oldPeer.address.equals(peer.address)) {
+                iteratorPeersList.remove();
+                this.peersList.add(peer);
+            }
+        }
+        System.out.println(peer.files.toString());
         return new Response("UPDATE_OK", "SERVER", peer.address);
 
     }
