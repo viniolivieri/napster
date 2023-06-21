@@ -1,7 +1,6 @@
 package br.edu.ufabc.napster.rmi;
 
 import br.edu.ufabc.napster.peer.Peer;
-import br.edu.ufabc.napster.rmi.serializables.ArrayListSerializable;
 import br.edu.ufabc.napster.rmi.serializables.Response;
 import com.sun.jmx.remote.internal.ArrayQueue;
 
@@ -9,11 +8,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class ManagerImpl extends UnicastRemoteObject implements Manager {
 
-    private ArrayQueue<Peer> peersList;
+    private ArrayQueue peersList;
 
     // Default capacity of 1000 peers
     public ManagerImpl() throws RemoteException {
@@ -32,7 +32,7 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
         if (!this.addressExists(peerAddress)) {
             this.peersList.add(newPeer);
             //System.out.printf("Sou peer %s com arquivos %s.", newPeer.address, Arrays.toString(newPeer.getSharedFiles()));
-            return new Response("JOIN_OK", "SERVER",newPeer.address);
+            return new Response("JOIN_OK", "SERVER", newPeer.address);
         }
         else {
             throw new Exception("peer with this address already exists, please choose another one.");
@@ -40,26 +40,36 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
     }
 
     // Return list of peers that has the searched file.
-    public ArrayListSerializable search(String file) throws RemoteException{
+    public ArrayList search(String file) throws RemoteException{
         ArrayList<Peer> peersWithThisFile = new ArrayList<Peer>();
-        for (Peer peer : this.peersList) {
+        Iterator<Peer> peerListIterator = this.peersList.iterator();
+
+        while (peerListIterator.hasNext()) {
+            System.out.println(peerListIterator.hasNext());
+            System.out.println(peerListIterator.next().address);
+            System.out.println(peerListIterator.next().getSharedFiles());
+            Peer peer = peerListIterator.next();
             List peerFiles = Arrays.asList(peer.getSharedFiles());
             if(peerFiles.contains(file)) {
                 peersWithThisFile.add(peer);
             }
         }
-        System.out.println(peersWithThisFile.toString());
-        return (ArrayListSerializable) peersWithThisFile;
+        return peersWithThisFile;
     }
 
 
-    public Response update() throws RemoteException {
+    public Response update(Peer peer, String file) throws RemoteException {
 
-        return null;
+        peer.files.add(file);
+        return new Response("UPDATE_OK", "SERVER", peer.address);
+
     }
 
     private boolean addressExists(String address) {
-        for (Peer peer : this.peersList) {
+
+        Iterator<Peer> peerListIterator = this.peersList.iterator();
+        while (peerListIterator.hasNext()) {
+            Peer peer = peerListIterator.next();
             if(peer.address.equals(address)) {
                 return true;
             }

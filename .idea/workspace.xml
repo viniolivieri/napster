@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Added peer to test join function.">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/serializables/ArrayListSerializable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/peer1/test1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/serializables/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/models/Peer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/serializables/ArrayListSerializable.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +29,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -64,13 +65,25 @@
       <recent name="C:\Users\vmoli\projeto1\napster\test_files" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.Dockerfile">
+  <component name="RunManager">
     <configuration name="Peer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.ufabc.napster.peer.Peer" />
       <module name="napster" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="br.edu.ufabc.napster.peer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.ufabc.napster.server.Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.ufabc.napster.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,9 +114,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Application.Peer" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Server (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -133,6 +146,17 @@
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Coded join function." />
@@ -146,11 +170,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

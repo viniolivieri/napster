@@ -9,4 +9,4 @@ COPY src/ ./src/
 
 RUN mvn package
 
-CMD ["java", "-jar", "target/napster.jar"]
+ENTRYPOINT ["mvn", "exec:java", "-Dexec.mainClass=br.edu.ufabc.napster.server.Server", "-Dexec.keepAlive=true"]
