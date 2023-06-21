@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Added peer to test join function.">
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_files/peer3/test2.txt" afterDir="false" />
+    <list default="true" id="921453d5-dbe5-40e2-b169-d4e10bfe50ae" name="Changes" comment="Fixed search and update functions.">
+      <change afterPath="$PROJECT_DIR$/TODO" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/peer/Peer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/ufabc/napster/rmi/ManagerImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +55,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vmoli\projeto1\napster" />
       <recent name="C:\Users\vmoli\projeto1\napster\test_files" />
     </key>
   </component>
@@ -126,14 +125,22 @@
       <option name="project" value="LOCAL" />
       <updated>1687280580898</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed search and update functions.">
+      <created>1687323244991</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687323244991</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Coded join function." />
     <MESSAGE value="Added peer to test join function." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added peer to test join function." />
+    <MESSAGE value="Fixed search and update functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed search and update functions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
