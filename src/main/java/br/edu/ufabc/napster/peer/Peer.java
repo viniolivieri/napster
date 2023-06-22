@@ -1,6 +1,7 @@
 package br.edu.ufabc.napster.peer;
 
 import br.edu.ufabc.napster.comm.TCPClient;
+import br.edu.ufabc.napster.comm.TCPServer;
 import br.edu.ufabc.napster.rmi.Manager;
 import br.edu.ufabc.napster.rmi.serializables.Response;
 
@@ -90,9 +91,11 @@ public class Peer implements Serializable {
 
         // Captures starting information from keyboard
         Peer peer = getStartingInformation();
+        TCPServer fileServer = new TCPServer(peer);
+        fileServer.start();
 
         Registry reg = LocateRegistry.getRegistry();
-        Manager manager = (Manager) reg.lookup("rmi://127.0.0.1/manager");
+        Manager manager = (Manager) reg.lookup("rmi://"+peer.getIp()+"/manager");
 
 
         //System.out.println(manager.join(peer));

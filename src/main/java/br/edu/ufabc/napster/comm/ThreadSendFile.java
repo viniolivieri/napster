@@ -41,7 +41,6 @@ public class ThreadSendFile extends ThreadFile{
             // Closing file and connection
             fileInputStream.close();
             dataOutputStream.close();
-            System.out.println("file sent!");
 
         } catch (Exception e) {
             
