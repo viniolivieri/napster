@@ -62,7 +62,6 @@ public class Peer implements Serializable {
         Peer peer = new Peer(ip, port, folder);
         return peer;
     }
-
     public String toString() {
         return "IP: " + this.getIp() + "\n"+
                 "Port: " + this.getPort() + "\n"+
@@ -83,6 +82,8 @@ public class Peer implements Serializable {
         System.out.println(manager.update(peer, "test1.txt"));
 
         ArrayList<Peer> peers = manager.search("test1.txt");
+        
+        //download(p.address, peer.getSharedFolder() + "/" + file);
         for(Peer p: peers) {
             System.out.println(p.toString());
         }
