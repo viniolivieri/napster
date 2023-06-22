@@ -1,22 +1,30 @@
 package br.edu.ufabc.napster.comm;
 
+import br.edu.ufabc.napster.peer.Peer;
+
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class ThreadReceiveFile extends ThreadFile{
 
     private static DataInputStream dataInputStream;
-    public ThreadReceiveFile(Socket peer) {
-        super(peer);
+    public Peer receivingPeer;
+    public String fileName;
+
+    public ThreadReceiveFile(Socket peerSocket, Peer peer, String fileName) {
+        super(peerSocket, fileName);
+        this.receivingPeer = peer;
     }
 
     @Override
     public void run() {
         try {
-            dataInputStream = new DataInputStream(this.peer.getInputStream());
+            dataInputStream = new DataInputStream(this.peerSocket.getInputStream());
 
-            String path = "C:\\Users\\vmoli\\projeto1\\napster\\test_files\\peer1\\test2.txt";
+            // Using Paths package to join the path that the file is going to be written.
+            String path = Paths.get(this.receivingPeer.getSharedFolder(), this.fileName).toString();
             int writingBytes = 0;
             FileOutputStream fileOutputStream = new FileOutputStream(path);
 

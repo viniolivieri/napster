@@ -1,9 +1,11 @@
 package br.edu.ufabc.napster.peer;
 
+import br.edu.ufabc.napster.comm.TCPClient;
 import br.edu.ufabc.napster.rmi.Manager;
 import br.edu.ufabc.napster.rmi.serializables.Response;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -54,10 +56,10 @@ public class Peer implements Serializable {
         InetAddress ip = InetAddress.getByName("127.0.0.1");
         System.out.println("Enter server port: ");
         //int port =  Integer.parseInt(scanner.nextLine());
-        int port =  7891;
+        int port =  7893;
         System.out.println("Enter peer sharing folder: ");
         //String folder = scanner.nextLine();
-        String folder = "/Users/vinijampp/Documents/0_UFABC/sistemas_distribuidos/projeto1/napster/test_files/peer1";
+        String folder = "C:\\Users\\vmoli\\projeto1\\napster\\test_files\\peer3";
 
         Peer peer = new Peer(ip, port, folder);
         return peer;
@@ -70,6 +72,20 @@ public class Peer implements Serializable {
                 "Files: " + this.files.toString() + "\n"+
                 "Get Files: " + this.getSharedFiles().toString() + "\n";
     }
+
+    // Function to download the file to the current Peer.
+    public void download(String fileName, ArrayList<Peer> availablePeerList) throws IOException {
+        // Get random peer from available peer list
+        int rnd = new Random().nextInt(availablePeerList.size());
+
+        Peer peerWithFile = availablePeerList.get(rnd);
+        TCPClient client = new TCPClient(peerWithFile);
+
+        // Now we have a client with connection with that peer.
+        // And we can download the file.
+        client.download(fileName);
+
+    }
     public static void main(String[] args) throws Exception{
 
         // Captures starting information from keyboard
@@ -77,6 +93,7 @@ public class Peer implements Serializable {
 
         Registry reg = LocateRegistry.getRegistry();
         Manager manager = (Manager) reg.lookup("rmi://127.0.0.1/manager");
+
 
         //System.out.println(manager.join(peer));
         System.out.println(manager.update(peer, "test1.txt"));

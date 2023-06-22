@@ -1,12 +1,20 @@
 package br.edu.ufabc.napster.comm;
 
+import br.edu.ufabc.napster.peer.Peer;
+
+import java.io.IOException;
 import java.net.Socket;
 
 public class TCPClient {
-    public static void main(String[] args) throws Exception {
-        Socket socket = new Socket("127.0.0.1", 9000);
 
-        ThreadReceiveFile thr = new ThreadReceiveFile(socket);
+    Peer peer;
+    public TCPClient(Peer peer){
+        this.peer = peer;
+    }
+
+    public void download(String fileName) throws IOException {
+        Socket socket = new Socket(this.peer.getIp(), this.peer.getPort());
+        ThreadReceiveFile thr = new ThreadReceiveFile(socket, this.peer, fileName);
         thr.start();
     }
 }
