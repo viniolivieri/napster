@@ -21,7 +21,7 @@ public class ThreadReceiveFile extends ThreadFile{
     @Override
     public void run() {
         try {
-            dataInputStream = new DataInputStream(this.peerSocket.getInputStream());
+            this.dataInputStream = new DataInputStream(this.peerSocket.getInputStream());
 
             // Using Paths package to join the path that the file is going to be written.
             String path = Paths.get(this.receivingPeer.getSharedFolder(), this.fileName).toString();
