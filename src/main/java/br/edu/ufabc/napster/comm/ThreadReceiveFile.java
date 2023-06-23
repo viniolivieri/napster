@@ -11,7 +11,6 @@ public class ThreadReceiveFile extends ThreadFile{
 
     private static DataInputStream dataInputStream;
     public Peer receivingPeer;
-    public String fileName;
 
     public ThreadReceiveFile(Socket peerSocket, Peer peer, String fileName) {
         super(peerSocket, fileName);
@@ -24,7 +23,7 @@ public class ThreadReceiveFile extends ThreadFile{
             this.dataInputStream = new DataInputStream(this.peerSocket.getInputStream());
 
             // Using Paths package to join the path that the file is going to be written.
-            String path = Paths.get(this.receivingPeer.getSharedFolder(), this.fileName).toString();
+            String path = Paths.get(this.receivingPeer.getSharedFolder(), this.fileName.trim()).toString();
             int writingBytes = 0;
             FileOutputStream fileOutputStream = new FileOutputStream(path);
 

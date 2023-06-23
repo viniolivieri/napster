@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import java.util.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.stream.Collectors;
 
 public class Peer implements Serializable {
 
@@ -30,12 +31,12 @@ public class Peer implements Serializable {
         this.port = port;
         this.sharedFolder = sharedFolder;
         this.files = new ArrayList<String>(this.getSharedFiles());
-        this.address = ip.toString() + ":" + Integer.toString(port);
+        this.address = this.getIp() + ":" + Integer.toString(port);
     }
 
     // Some getProperties functions
     public int getPort(){ return this.port;}
-    public String getIp(){ return this.ip.toString();}
+    public String getIp(){ return this.ip.getHostAddress();}
     public String getSharedFolder(){ return this.sharedFolder;}
 
     // This get function in special is defined to list the files that are available in the defined shared folder.
@@ -53,14 +54,11 @@ public class Peer implements Serializable {
     public static Peer getStartingInformation() throws UnknownHostException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter peer IP: ");
-        //InetAddress ip = InetAddress.getByName(scanner.nextLine());
-        InetAddress ip = InetAddress.getByName("127.0.0.1");
+        InetAddress ip = InetAddress.getByName(scanner.nextLine());
         System.out.println("Enter server port: ");
-        //int port =  Integer.parseInt(scanner.nextLine());
-        int port =  7893;
+        int port =  Integer.parseInt(scanner.nextLine());
         System.out.println("Enter peer sharing folder: ");
-        //String folder = scanner.nextLine();
-        String folder = "C:\\Users\\vmoli\\projeto1\\napster\\test_files\\peer3";
+        String folder = scanner.nextLine();
 
         Peer peer = new Peer(ip, port, folder);
         return peer;
@@ -75,17 +73,25 @@ public class Peer implements Serializable {
     }
 
     // Function to download the file to the current Peer.
-    public void download(String fileName, ArrayList<Peer> availablePeerList) throws IOException {
-        // Get random peer from available peer list
-        int rnd = new Random().nextInt(availablePeerList.size());
-
-        Peer peerWithFile = availablePeerList.get(rnd);
-        TCPClient client = new TCPClient(peerWithFile);
+    public void download(String fileName, Peer peer) throws IOException {
+        Peer peerWithFile = peer;
+        Peer me = this;
+        TCPClient client = new TCPClient(me, peerWithFile);
 
         // Now we have a client with connection with that peer.
         // And we can download the file.
         client.download(fileName);
 
+    }
+
+    public static int printMenu(Scanner scanner){
+        String menu = "Choose your command:\n" +
+                "1) JOIN\n" +
+                "2) SEARCH\n" +
+                "3) DOWNLOAD\n";
+                System.out.println(menu);
+
+        return Integer.parseInt(scanner.nextLine());
     }
     public static void main(String[] args) throws Exception{
 
@@ -95,17 +101,62 @@ public class Peer implements Serializable {
         fileServer.start();
 
         Registry reg = LocateRegistry.getRegistry();
-        Manager manager = (Manager) reg.lookup("rmi://"+peer.getIp()+"/manager");
+        Manager manager = (Manager) reg.lookup("rmi://" + peer.getIp() + "/manager");
 
+        // Menu
+        int selector;
+        ArrayList<Peer> peers = new ArrayList<>();
+        String fileName = null;
+        Scanner scanner = new Scanner(System.in);
+        Hashtable<String, Peer> hashTablePeers = new Hashtable<>();
+        selector = printMenu(scanner);
+        while (selector != 0) {
+            switch (selector) {
+                case 1:
+                    Response response = manager.join(peer);
+                    System.out.println();
+                    if (response.message.equals("JOIN_OK")){
+                        System.out.printf("Sou peer %s com arquivos %s\n", peer.address, peer.getSharedFiles().toString());
+                    }
+                    selector = printMenu(scanner);
+                    break;
+                case 2:
+                    System.out.println("Please type the name of the file that you want to search in the network:");
+                    fileName = scanner.nextLine();
+                    peers = manager.search(peer, fileName);
+                    hashTablePeers = new Hashtable<>();
+                    System.out.printf("Peers with requested file: \n");
+                    for (Peer p: peers){
+                        System.out.print("- " + p.address + "\n");
+                        hashTablePeers.put(p.address, p);
+                    }
+                    selector = printMenu(scanner);
+                    break;
+                case 3:
+                    if (fileName == null) {
+                        System.out.println("Please, first you need to search for a file.");
+                        selector = printMenu(scanner);
+                        break;
+                    }
+                    else if (peers.isEmpty()) {
+                        System.out.println("File is not available.");
+                        selector = printMenu(scanner);
+                        break;
+                    }
+                    System.out.printf("Please type from which peer you want to download %s:", fileName);
+                    String address = scanner.nextLine();
+                    Peer peerWithFile = hashTablePeers.get(address);
+                    peer.download(fileName, peerWithFile);
+                    manager.update(peer, fileName);
+                    selector = printMenu(scanner);
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.print("Opção inválida! Tente de novo.\n");
+                    selector = printMenu(scanner);
+            }
 
-        //System.out.println(manager.join(peer));
-        System.out.println(manager.update(peer, "test1.txt"));
-
-        ArrayList<Peer> peers = manager.search("test1.txt");
-        
-        //download(p.address, peer.getSharedFolder() + "/" + file);
-        for(Peer p: peers) {
-            System.out.println(p.toString());
         }
 
     }

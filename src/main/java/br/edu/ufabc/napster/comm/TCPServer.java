@@ -35,7 +35,6 @@ public class TCPServer extends Thread {
         long fileNameLength = dataInputStream.readLong();
         byte[] fileNameByte = new byte[1024 * 16];
         dataInputStream.read(fileNameByte, 0, (int) fileNameLength);
-
         return new String(fileNameByte, StandardCharsets.UTF_8);
     }
 

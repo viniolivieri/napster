@@ -20,15 +20,13 @@ public class Server {
     }
 
     public int getPort(){ return this.port;}
-    public String getIp(){ return this.ip.toString();}
+    public String getIp(){ return this.ip.getHostAddress();}
     public static Server getStartingInformation() throws UnknownHostException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter server IP: ");
-        //InetAddress ip = InetAddress.getByName(scanner.nextLine());
-        InetAddress ip = InetAddress.getByName("127.0.0.1");
+        InetAddress ip = InetAddress.getByName(scanner.nextLine());
         System.out.println("Enter server port: ");
-        //int port =  Integer.parseInt(scanner.nextLine());
-        int port = 1099;
+        int port =  Integer.parseInt(scanner.nextLine());
 
         Server server = new Server(ip, port);
         return server;
@@ -41,8 +39,7 @@ public class Server {
         Manager manager = new ManagerImpl();
 
         Registry reg = LocateRegistry.getRegistry();
-        reg.bind("rmi://127.0.0.1/manager", manager);
-        System.out.println("Server no ar.");
-    }
+        reg.bind("rmi://" + server.getIp() + "/manager", manager);
 
+    }
 }

@@ -9,6 +9,6 @@ import java.util.ArrayList;
 
 public interface Manager extends Remote {
     public Response join(Peer peer) throws Exception;
-    public ArrayList search(String file) throws RemoteException;
+    public ArrayList search(Peer requestingPeer, String file) throws RemoteException;
     public Response update(Peer peer, String file) throws RemoteException;
 }

@@ -28,7 +28,7 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
         String peerAddress = newPeer.address;
         if (!this.addressExists(peerAddress)) {
             this.peersList.add(newPeer);
-            //System.out.printf("Sou peer %s com arquivos %s.", newPeer.address, Arrays.toString(newPeer.getSharedFiles()));
+            System.out.printf("Peer %s adicionado com arquivos %s\n", newPeer.address, newPeer.getSharedFiles().toString());
             return new Response("JOIN_OK", "SERVER", newPeer.address);
         }
         else {
@@ -37,7 +37,8 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
     }
 
     // Return list of peers that has the searched file.
-    public ArrayList search(String file) throws RemoteException{
+    public ArrayList search(Peer requestingPeer, String file) throws RemoteException{
+        System.out.printf("Peer %s solicitou arquivo %s.\n", requestingPeer.address, file);
         ArrayList<Peer> peersWithThisFile = new ArrayList<Peer>();
         Iterator<Peer> peerListIterator = this.peersList.iterator();
 
@@ -62,7 +63,6 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
                 this.peersList.add(peer);
             }
         }
-        System.out.println(peer.files.toString());
         return new Response("UPDATE_OK", "SERVER", peer.address);
 
     }

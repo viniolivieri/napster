@@ -8,18 +8,19 @@ import java.net.Socket;
 
 public class TCPClient {
 
-    Peer peer;
-    public TCPClient(Peer peer){
-        this.peer = peer;
+    Peer peerWithFile;
+    Peer receiverPeer;
+    public TCPClient(Peer receiverPeer, Peer peerWithFile){
+        this.peerWithFile = peerWithFile;
+        this.receiverPeer = receiverPeer;
     }
 
     public void download(String fileName) throws IOException {
 
-        Socket socket = new Socket(this.peer.getIp(), this.peer.getPort());
+        Socket socket = new Socket(this.peerWithFile.getIp(), this.peerWithFile.getPort());
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
         this.sendFileName(dataOutputStream, fileName);
-
-        ThreadReceiveFile thr = new ThreadReceiveFile(socket, this.peer, fileName);
+        ThreadReceiveFile thr = new ThreadReceiveFile(socket, this.receiverPeer, fileName);
         thr.start();
     }
 
@@ -27,7 +28,7 @@ public class TCPClient {
         // Send the fileName length and its content.
         long fileLength = fileName.length();
         dataOutputStream.writeLong(fileLength);
-        dataOutputStream.writeChars(fileName);
+        dataOutputStream.writeBytes(fileName);
 
     }
 }

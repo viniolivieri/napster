@@ -6,7 +6,7 @@ public abstract class ThreadFile extends Thread {
     public String fileName = null;
     public ThreadFile(Socket peer, String fileName){
         this.peerSocket = peer;
-        this.fileName = String.valueOf(fileName);
+        this.fileName = fileName;
     }
     public abstract void run();
 
