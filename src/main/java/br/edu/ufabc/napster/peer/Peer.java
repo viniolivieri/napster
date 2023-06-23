@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
 import java.util.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.stream.Collectors;
 
 public class Peer implements Serializable {
 
