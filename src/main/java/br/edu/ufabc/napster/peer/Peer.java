@@ -53,11 +53,11 @@ public class Peer implements Serializable {
     // Function to ask the user information needed in the start of the peer.
     public static Peer getStartingInformation() throws UnknownHostException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter peer IP: ");
+        System.out.println("Entre com IP do Peer: ");
         InetAddress ip = InetAddress.getByName(scanner.nextLine());
-        System.out.println("Enter server port: ");
+        System.out.println("Entre com porta do Peer: ");
         int port =  Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter peer sharing folder: ");
+        System.out.println("Entre com a pasta compartilhada do Peer: ");
         String folder = scanner.nextLine();
 
         Peer peer = new Peer(ip, port, folder);
@@ -82,10 +82,12 @@ public class Peer implements Serializable {
         // And we can download the file.
         client.download(fileName);
 
+        System.out.printf("Arquivo %s baixado com sucesso na pasta %s\n", fileName, me.getSharedFolder());
+
     }
 
     public static int printMenu(Scanner scanner){
-        String menu = "Choose your command:\n" +
+        String menu = "Escolha seu comando:\n" +
                 "1) JOIN\n" +
                 "2) SEARCH\n" +
                 "3) DOWNLOAD\n";
@@ -121,11 +123,11 @@ public class Peer implements Serializable {
                     selector = printMenu(scanner);
                     break;
                 case 2:
-                    System.out.println("Please type the name of the file that you want to search in the network:");
+                    System.out.println("Por favor, digite o nome do arquivo que deseja procurar na rede:");
                     fileName = scanner.nextLine();
                     peers = manager.search(peer, fileName);
                     hashTablePeers = new Hashtable<>();
-                    System.out.printf("Peers with requested file: \n");
+                    System.out.printf("Peers com o arquivo solicitado: \n");
                     for (Peer p: peers){
                         System.out.print("- " + p.address + "\n");
                         hashTablePeers.put(p.address, p);
@@ -134,16 +136,16 @@ public class Peer implements Serializable {
                     break;
                 case 3:
                     if (fileName == null) {
-                        System.out.println("Please, first you need to search for a file.");
+                        System.out.println("Por favor, primeiro use SEARCH para procurar um arquivo na rede.");
                         selector = printMenu(scanner);
                         break;
                     }
                     else if (peers.isEmpty()) {
-                        System.out.println("File is not available.");
+                        System.out.println("Arquivo buscado não disponível.");
                         selector = printMenu(scanner);
                         break;
                     }
-                    System.out.printf("Please type from which peer you want to download %s:", fileName);
+                    System.out.printf("Porfavor, digite o endereço IP:PORTA do peer que deseja fazer o downlaod do arquivo: %s:", fileName);
                     String address = scanner.nextLine();
                     Peer peerWithFile = hashTablePeers.get(address);
                     peer.download(fileName, peerWithFile);

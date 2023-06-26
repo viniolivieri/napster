@@ -23,9 +23,9 @@ public class Server {
     public String getIp(){ return this.ip.getHostAddress();}
     public static Server getStartingInformation() throws UnknownHostException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter server IP: ");
+        System.out.println("Entre com IP do Servidor: ");
         InetAddress ip = InetAddress.getByName(scanner.nextLine());
-        System.out.println("Enter server port: ");
+        System.out.println("Entre com porta do Servidor: ");
         int port =  Integer.parseInt(scanner.nextLine());
 
         Server server = new Server(ip, port);

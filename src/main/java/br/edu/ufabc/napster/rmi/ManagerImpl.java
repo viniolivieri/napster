@@ -32,7 +32,7 @@ public class ManagerImpl extends UnicastRemoteObject implements Manager {
             return new Response("JOIN_OK", "SERVER", newPeer.address);
         }
         else {
-            throw new Exception("peer with this address already exists, please choose another one.");
+            throw new Exception("Peer com este endereço já existe na rede, por favor escolha outro.");
         }
     }
 
