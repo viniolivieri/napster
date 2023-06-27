@@ -16,8 +16,10 @@ public class TCPClient {
     }
 
     public void download(String fileName) throws IOException {
-
+        // Cria um socket de comunicação com o serverSocket iniciado do lado do peer
+        // que contem o arquivo.
         Socket socket = new Socket(this.peerWithFile.getIp(), this.peerWithFile.getPort());
+
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
         this.sendFileName(dataOutputStream, fileName);
         ThreadReceiveFile thr = new ThreadReceiveFile(socket, this.receiverPeer, fileName);

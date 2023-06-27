@@ -17,9 +17,13 @@ public class TCPServer extends Thread {
     public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket(this.peer.getPort());
-
+            // Um serversocket é criado que basicamente ficará esperando um socket se conectar
+            // na porta definida acima
             while (true) {
                 Socket serverSocketPeer = serverSocket.accept();
+                // Levanta outro thread para o envio do arquivo.
+                // Mas antes espera pelo nome do arquivo que deve enviar pela função
+                // receiveFileNameToSend
                 ThreadSendFile thr = new ThreadSendFile(serverSocketPeer, this.peer, this.receiveFileNameToSend(serverSocketPeer));
                 thr.start();
             }
@@ -39,4 +43,3 @@ public class TCPServer extends Thread {
     }
 
 }
-
